@@ -33,7 +33,11 @@ namespace Features.Tests
 
             // Assert
             Assert.True(cliente.EhValido());
+
+            //Verify verifica se o metodo foi chamado ou não
             clienteRepo.Verify(r => r.Adicionar(cliente),Times.Once);
+
+            //It.Any significa se foi enviado qualquer objeto que implementa INotification esta Ok, no caso passara a classa ClienteEmailNotification que implementa INotification
             mediatr.Verify(m=>m.Publish(It.IsAny<INotification>(),CancellationToken.None),Times.Once);
         }
 

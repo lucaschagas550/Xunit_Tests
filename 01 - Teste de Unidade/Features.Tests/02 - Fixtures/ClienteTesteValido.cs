@@ -2,6 +2,7 @@
 
 namespace Features.Tests
 {
+    //Todas classes de teste que receber a fixture tem que ter essa anotação para identificar
     [Collection(nameof(ClienteCollection))]
     public class ClienteTesteValido
     {

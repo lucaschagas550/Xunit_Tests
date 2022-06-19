@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Features.Tests
 {
+    //Anotação de coleção da fixture para usar nos testes
     [CollectionDefinition(nameof(ClienteCollection))]
     public class ClienteCollection : ICollectionFixture<ClienteTestsFixture>
     {}
