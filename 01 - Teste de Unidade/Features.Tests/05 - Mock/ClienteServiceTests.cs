@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using System.Threading;
-using Features.Clientes;
+﻿using Features.Clientes;
 using MediatR;
 using Moq;
-using Xunit;
 
 namespace Features.Tests
 {
@@ -35,10 +32,10 @@ namespace Features.Tests
             Assert.True(cliente.EhValido());
 
             //Verify verifica se o metodo foi chamado ou não
-            clienteRepo.Verify(r => r.Adicionar(cliente),Times.Once);
+            clienteRepo.Verify(r => r.Adicionar(cliente), Times.Once);
 
             //It.Any significa se foi enviado qualquer objeto que implementa INotification esta Ok, no caso passara a classa ClienteEmailNotification que implementa INotification
-            mediatr.Verify(m=>m.Publish(It.IsAny<INotification>(),CancellationToken.None),Times.Once);
+            mediatr.Verify(m => m.Publish(It.IsAny<INotification>(), CancellationToken.None), Times.Once);
         }
 
         [Fact(DisplayName = "Adicionar Cliente com Falha")]
@@ -69,6 +66,7 @@ namespace Features.Tests
             var clienteRepo = new Mock<IClienteRepository>();
             var mediatr = new Mock<IMediator>();
 
+            //Quando metodo obterTodos do repositorio IClienteRepository for chamado sera retornado uma lista de ClienteTestsBogusFixture.ObterClientesVariados que será gerada
             clienteRepo.Setup(c => c.ObterTodos())
                 .Returns(_clienteTestsBogus.ObterClientesVariados());
 
@@ -80,7 +78,7 @@ namespace Features.Tests
             // Assert 
             clienteRepo.Verify(r => r.ObterTodos(), Times.Once);
             Assert.True(clientes.Any());
-            Assert.False(clientes.Count(c=>!c.Ativo) > 0);
+            Assert.False(clientes.Count(c => !c.Ativo) > 0);
         }
     }
 }
