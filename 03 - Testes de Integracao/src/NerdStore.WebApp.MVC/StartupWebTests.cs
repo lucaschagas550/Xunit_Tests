@@ -93,13 +93,10 @@ namespace NerdStore.WebApp.MVC
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Vitrine}/{action=Index}/{id?}");
-            });
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }
